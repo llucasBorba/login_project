@@ -38,10 +38,9 @@ public class UserController {
         Users user = new Users(dtoUser.email(),hashPassword,salt);
         Users savedUser = userRepository.save(user);
 
-        String message = emailService.sendTextMail(user.getEmail(),"Deixa de ser baitola", "GAYYYYY");
+        String message = emailService.sendTextMail(user.getEmail(),"Token de validação", "6575");
 
-
-        return ResponseEntity.ok(savedUser + message);
+        return ResponseEntity.ok(savedUser);
     }
 
 }
