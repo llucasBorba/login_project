@@ -1,12 +1,11 @@
 package com.project.login.controller;
 
-import com.project.login.Model.Users;
-import com.project.login.Service.Cryptographic;
-import com.project.login.Service.EmailService;
-import com.project.login.Service.SaltGenerator;
+import com.project.login.model.Users;
+import com.project.login.service.Cryptographic;
+import com.project.login.service.EmailService;
+import com.project.login.service.SaltGenerator;
 import com.project.login.dto.DtoUser;
 import com.project.login.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

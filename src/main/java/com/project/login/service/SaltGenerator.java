@@ -1,4 +1,4 @@
-package com.project.login.Service;
+package com.project.login.service;
 import org.springframework.stereotype.Service;
 
 import java.security.SecureRandom;

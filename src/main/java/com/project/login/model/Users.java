@@ -1,8 +1,10 @@
-package com.project.login.Model;
+package com.project.login.model;
 
+import com.project.login.dto.DtoUser;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.Objects;
 import java.util.UUID;
 
 @Entity
@@ -32,5 +34,22 @@ public class Users {
 
     public Users() {
 
+    }
+    public Users(DtoUser dtoUser){
+        this.email = dtoUser.email();
+        this.password = dtoUser.password();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Users users = (Users) o;
+        return Objects.equals(id, users.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

@@ -1,6 +1,6 @@
 package com.project.login.repository;
 
-import com.project.login.Model.Users;
+import com.project.login.model.Users;
 import org.springframework.data.repository.CrudRepository;
 import java.util.UUID;
 
