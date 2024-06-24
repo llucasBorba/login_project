@@ -1,11 +1,26 @@
 package com.project.login.dto;
 
 import com.project.login.model.Users;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-public record DtoUser(String email, String password) {
+import java.util.UUID;
+
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+public class DtoUser {
+
+    private String email;
+    private String password;
+    private UUID id;
 
     public DtoUser(Users user) {
-        this(user.getEmail(), user.getPassword());
+       this.email = user.getEmail();
+       this.password = user.getPassword();
+       this.id = user.getId();
     }
-
 }

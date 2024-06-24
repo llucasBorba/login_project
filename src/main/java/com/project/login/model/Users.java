@@ -2,7 +2,9 @@ package com.project.login.model;
 
 import com.project.login.dto.DtoUser;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.Objects;
 import java.util.UUID;
@@ -10,6 +12,8 @@ import java.util.UUID;
 @Entity
 @Table(name = "USERS")
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Users {
 
     @Id
@@ -24,12 +28,9 @@ public class Users {
     private String password;
 
     public Users(DtoUser dtoUser) {
-        this.email = dtoUser.email();
-        this.password = dtoUser.password();
+        this.email = dtoUser.getEmail();
+        this.password = dtoUser.getPassword();
     }
-    public Users() {
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
