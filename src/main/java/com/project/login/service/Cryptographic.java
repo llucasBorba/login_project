@@ -11,8 +11,8 @@ public class Cryptographic {
     private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
 
-    public String encriptarSenha (String senha, String salt){
-        return passwordEncoder.encode(senha + salt);
+    public String encriptarSenha (String senha){
+        return passwordEncoder.encode(senha);
     }
 
     public Boolean varificarSenhas (String rawPassword, String cryptPassword){

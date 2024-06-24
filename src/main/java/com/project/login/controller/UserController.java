@@ -3,7 +3,6 @@ package com.project.login.controller;
 import com.project.login.model.Users;
 import com.project.login.service.Cryptographic;
 import com.project.login.service.EmailService;
-import com.project.login.service.SaltGenerator;
 import com.project.login.dto.DtoUser;
 import com.project.login.repository.UserRepository;
 import org.springframework.http.ResponseEntity;
@@ -32,9 +31,9 @@ public class UserController {
 //        if (userRepository.findByEmail(dtoUser.email()) != null) {
 //            return ResponseEntity.badRequest().body("Email já cadastrado");
 //        }
-        String salt = SaltGenerator.gerarSalt();
-        String hashPassword = cryptographic.encriptarSenha(dtoUser.password(), salt);
-        Users user = new Users(dtoUser.email(),hashPassword,salt);
+        String hashPassword = cryptographic.encriptarSenha(dtoUser.password());
+        Users user = new Users(dtoUser);
+        user.setPassword(hashPassword);
         Users savedUser = userRepository.save(user);
 
         String message = emailService.sendTextMail(user.getEmail(),"Token de validação", "6575");

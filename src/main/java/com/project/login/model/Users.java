@@ -8,36 +8,26 @@ import java.util.Objects;
 import java.util.UUID;
 
 @Entity
-@Table(name = "users")
+@Table(name = "USERS")
 @Data
 public class Users {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(name = "id", updatable = false, nullable = false)
+    @Column( updatable = false, nullable = false)
     private UUID id;
 
-    @Column(name = "email", nullable = false, unique = true, length = 255)
+    @Column(nullable = false, unique = true)
     private String email;
 
-    @Column(name = "password", nullable = false, length = 255)
+    @Column( nullable = false)
     private String password;
 
-    @Column(name = "salt", nullable = false)
-    private String salt;
-
-    public Users(String email, String password, String salt) {
-        this.email = email;
-        this.password = password;
-        this.salt = salt;
-    }
-
-    public Users() {
-
-    }
-    public Users(DtoUser dtoUser){
+    public Users(DtoUser dtoUser) {
         this.email = dtoUser.email();
         this.password = dtoUser.password();
+    }
+    public Users() {
     }
 
     @Override
