@@ -5,26 +5,27 @@ import com.project.login.service.Cryptographic;
 import com.project.login.service.EmailService;
 import com.project.login.dto.DtoUser;
 import com.project.login.repository.UserRepository;
-import org.apache.catalina.User;
+import com.project.login.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/usuarios")
 public class UserController {
 
-    private final UserRepository userRepository;
-    private final Cryptographic cryptographic;
-    private final EmailService emailService;
+    @Autowired
+    private  UserRepository userRepository;
+    @Autowired
+    private  Cryptographic cryptographic;
+    @Autowired
+    private  EmailService emailService;
+    @Autowired
+    private  UserService userService;
 
-
-    public UserController(UserRepository userRepository, Cryptographic cryptographic, EmailService emailService) {
-        this.userRepository = userRepository;
-        this.cryptographic = cryptographic;
-        this.emailService = emailService;
-    }
 
     @PostMapping(" ")
     public ResponseEntity<Object> creatUser(@RequestBody DtoUser dtoUser){
@@ -41,6 +42,29 @@ public class UserController {
         String message = emailService.sendTextMail(user.getEmail(),"Token de validação", "6575");
         return ResponseEntity.ok(savedUser);
     }
+
+    @GetMapping("")
+    public ResponseEntity<List<DtoUser>> getAllUsers(){
+        return ResponseEntity.ok(userService.getAllUsers());
+    }
+
+    @GetMapping("/{email}")
+    public ResponseEntity<DtoUser> getUserByEmail(@PathVariable String email){
+        return ResponseEntity.ok(userService.getUserByEmail(email));
+    }
+
+    @PutMapping(" ")
+    public ResponseEntity<DtoUser> updateUser(@RequestBody DtoUser dtoUser){
+        return ResponseEntity.ok(userService.update(dtoUser));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteUser(@PathVariable UUID id){
+      userService.delete(id);
+      return ResponseEntity.ok(null);
+    }
+
+
 
 
 

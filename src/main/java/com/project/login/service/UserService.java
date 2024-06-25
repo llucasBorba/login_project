@@ -26,7 +26,6 @@ public class UserService {
         return new DtoUser(user);
     }
     public DtoUser findById(UUID id){
-
         return new DtoUser(userRepository.findById(id).get());
     }
 
