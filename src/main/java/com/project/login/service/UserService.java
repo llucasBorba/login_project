@@ -25,9 +25,12 @@ public class UserService {
         Users user = userRepository.findByEmail(email);
         return new DtoUser(user);
     }
-    public DtoUser findById(UUID id){
-        return new DtoUser(userRepository.findById(id).get());
+    public DtoUser findById(String id){
+        UUID uuid = UUID.fromString(id);
+        return new DtoUser(userRepository.findById(uuid).get());
     }
+
+
 
     public DtoUser post (DtoUser dtoUser){
         Users user = new Users(dtoUser);

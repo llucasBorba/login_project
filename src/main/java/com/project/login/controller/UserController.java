@@ -1,6 +1,5 @@
 package com.project.login.controller;
 
-import com.project.login.model.Users;
 import com.project.login.service.Cryptographic;
 import com.project.login.service.EmailService;
 import com.project.login.dto.DtoUser;
@@ -18,11 +17,7 @@ import java.util.UUID;
 public class UserController {
 
     @Autowired
-    private  UserRepository userRepository;
-    @Autowired
     private  Cryptographic cryptographic;
-    @Autowired
-    private  EmailService emailService;
     @Autowired
     private  UserService userService;
 
@@ -36,11 +31,11 @@ public class UserController {
 //            return ResponseEntity.badRequest().body("Email já cadastrado");
 //        }
         String hashPassword = cryptographic.encriptarSenha(dtoUser.getPassword());
-        Users user = new Users(dtoUser);
-        user.setPassword(hashPassword);
-        Users savedUser = userRepository.save(user);
-        String message = emailService.sendTextMail(user.getEmail(),"Token de validação", "6575");
-        return ResponseEntity.ok(savedUser);
+        dtoUser.setPassword(hashPassword);
+
+        //String message = emailService.sendTextMail(user.getEmail(),"Token de validação", "6575");
+
+        return ResponseEntity.ok(userService.post(dtoUser));
     }
 
     @GetMapping("")
@@ -53,6 +48,11 @@ public class UserController {
         return ResponseEntity.ok(userService.getUserByEmail(email));
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<DtoUser> getUserByid(@PathVariable String id){
+        return ResponseEntity.ok(userService.findById(id));
+    }
+
     @PutMapping(" ")
     public ResponseEntity<DtoUser> updateUser(@RequestBody DtoUser dtoUser){
         return ResponseEntity.ok(userService.update(dtoUser));
@@ -63,6 +63,8 @@ public class UserController {
       userService.delete(id);
       return ResponseEntity.ok(null);
     }
+
+
 
 
 
