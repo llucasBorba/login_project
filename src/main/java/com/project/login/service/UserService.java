@@ -29,9 +29,6 @@ public class UserService {
         UUID uuid = UUID.fromString(id);
         return new DtoUser(userRepository.findById(uuid).get());
     }
-
-
-
     public DtoUser post (DtoUser dtoUser){
         Users user = new Users(dtoUser);
         return new DtoUser(userRepository.save(user));

@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.beans.BeanUtils;
 
 import java.util.UUID;
 
@@ -19,8 +20,6 @@ public class DtoUser {
     private UUID id;
 
     public DtoUser(Users user) {
-       this.email = user.getEmail();
-       this.password = user.getPassword();
-       this.id = user.getId();
+        BeanUtils.copyProperties(user,this);
     }
 }

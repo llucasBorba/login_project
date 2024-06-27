@@ -21,6 +21,9 @@ public class UserController {
     @Autowired
     private  UserService userService;
 
+    @Autowired
+    private EmailService emailService;
+
 
     @PostMapping(" ")
     public ResponseEntity<Object> creatUser(@RequestBody DtoUser dtoUser){
@@ -33,7 +36,7 @@ public class UserController {
         String hashPassword = cryptographic.encriptarSenha(dtoUser.getPassword());
         dtoUser.setPassword(hashPassword);
 
-        //String message = emailService.sendTextMail(user.getEmail(),"Token de validação", "6575");
+// String message = emailService.sendTextMail(dtoUser.getEmail(),"Você tem perfil foda ", "6575");
 
         return ResponseEntity.ok(userService.post(dtoUser));
     }
