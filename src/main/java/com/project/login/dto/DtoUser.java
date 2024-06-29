@@ -1,6 +1,7 @@
 package com.project.login.dto;
 
 import com.project.login.model.Users;
+import com.project.login.model.enun.UserStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -18,6 +19,7 @@ public class DtoUser {
     private String email;
     private String password;
     private UUID id;
+    private UserStatus status;
 
     public DtoUser(Users user) {
         BeanUtils.copyProperties(user,this);

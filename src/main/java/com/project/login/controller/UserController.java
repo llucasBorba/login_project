@@ -1,9 +1,7 @@
 package com.project.login.controller;
 
-import com.project.login.service.Cryptographic;
-import com.project.login.service.EmailService;
 import com.project.login.dto.DtoUser;
-import com.project.login.repository.UserRepository;
+import com.project.login.service.EmailService;
 import com.project.login.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,8 +14,6 @@ import java.util.UUID;
 @RequestMapping("/usuarios")
 public class UserController {
 
-    @Autowired
-    private  Cryptographic cryptographic;
     @Autowired
     private  UserService userService;
 
@@ -33,8 +29,6 @@ public class UserController {
 //        if (userRepository.findByEmail(dtoUser.email()) != null) {
 //            return ResponseEntity.badRequest().body("Email já cadastrado");
 //        }
-        String hashPassword = cryptographic.encriptarSenha(dtoUser.getPassword());
-        dtoUser.setPassword(hashPassword);
 
 // String message = emailService.sendTextMail(dtoUser.getEmail(),"Você tem perfil foda ", "6575");
 
@@ -66,11 +60,4 @@ public class UserController {
       userService.delete(id);
       return ResponseEntity.ok(null);
     }
-
-
-
-
-
-
-
 }

@@ -2,6 +2,7 @@ package com.project.login.service;
 
 import com.project.login.dto.DtoUser;
 import com.project.login.model.Users;
+import com.project.login.model.enun.UserStatus;
 import com.project.login.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +16,8 @@ public class UserService {
 
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private  Cryptographic cryptographic;
 
     public List<DtoUser> getAllUsers(){
         List<Users> usuarios = userRepository.findAll();
@@ -30,7 +33,10 @@ public class UserService {
         return new DtoUser(userRepository.findById(uuid).get());
     }
     public DtoUser post (DtoUser dtoUser){
+        dtoUser.setStatus(UserStatus.INATIVO);
+        String rawPassword = dtoUser.getPassword();
         Users user = new Users(dtoUser);
+        user.setPassword(cryptographic.encriptarSenha(rawPassword));
         return new DtoUser(userRepository.save(user));
     }
 
@@ -42,7 +48,5 @@ public class UserService {
         Users user = new Users(dtoUser);
         return new DtoUser(userRepository.save(user));
     }
-
-
 
 }

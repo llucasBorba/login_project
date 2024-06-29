@@ -1,6 +1,7 @@
 package com.project.login.model;
 
 import com.project.login.dto.DtoUser;
+import com.project.login.model.enun.UserStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -27,6 +28,9 @@ public class Users {
 
     @Column( nullable = false)
     private String password;
+
+    @Column(nullable = false)
+    private UserStatus status;
 
     public Users(DtoUser dtoUser) {
         BeanUtils.copyProperties(dtoUser,this);
