@@ -1,17 +1,19 @@
 package com.project.login.model;
 
-import com.project.login.dto.DtoResource;
+import com.project.login.dto.ResourceDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.beans.BeanUtils;
 
 import java.util.Objects;
 
 @Entity
 @Table(name ="RESOURCE")
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class Resource {
@@ -26,8 +28,8 @@ public class Resource {
     @Column(nullable = false)
     String chave;
 
-    public Resource(DtoResource dtoResource){
-        BeanUtils.copyProperties(dtoResource,this);
+    public Resource(ResourceDTO resourceDTO){
+        BeanUtils.copyProperties(resourceDTO,this);
     }
 
     @Override

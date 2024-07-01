@@ -1,6 +1,6 @@
 package com.project.login.service;
 
-import com.project.login.dto.DtoResource;
+import com.project.login.dto.ResourceDTO;
 import com.project.login.model.Resource;
 import com.project.login.repository.ResourceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,22 +15,22 @@ public class ResourceService {
     @Autowired
     private ResourceRepository resourceRepository;
 
-    public List<DtoResource> getAllResources (){
+    public List<ResourceDTO> getAllResources (){
         List<Resource> resources = resourceRepository.findAll();
-        return resources.stream().map(DtoResource::new).collect(Collectors.toList());
+        return resources.stream().map(ResourceDTO::new).collect(Collectors.toList());
     }
-    public DtoResource getResourceById(Long id){
-        return new DtoResource(resourceRepository.findById(id).get());
-    }
-
-    public DtoResource post(DtoResource dtoResource){
-        Resource resource = new Resource(dtoResource);
-        return new DtoResource(resource);
+    public ResourceDTO getResourceById(Long id){
+        return new ResourceDTO(resourceRepository.findById(id).get());
     }
 
-    public DtoResource put(DtoResource dtoResource){
-        Resource resource = new Resource(dtoResource);
-        return new DtoResource(resourceRepository.save(resource));
+    public ResourceDTO createResource(ResourceDTO resourceDTO){
+        Resource resource = new Resource(resourceDTO);
+        return new ResourceDTO(resourceRepository.save(resource));
+    }
+
+    public ResourceDTO put(ResourceDTO resourceDTO){
+        Resource resource = new Resource(resourceDTO);
+        return new ResourceDTO(resourceRepository.save(resource));
     }
 
     public void delete(Long id){

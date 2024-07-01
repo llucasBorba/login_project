@@ -9,13 +9,13 @@ import org.springframework.beans.BeanUtils;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class DtoResource {
+public class ResourceDTO {
 
     Long id;
     String name;
     String chave;
 
-    public DtoResource(Resource resource){
+    public ResourceDTO(Resource resource){
         BeanUtils.copyProperties(resource,this);
     }
 }

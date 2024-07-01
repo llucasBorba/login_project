@@ -1,6 +1,6 @@
 package com.project.login.service;
 
-import com.project.login.dto.DtoUser;
+import com.project.login.dto.UserDTO;
 import com.project.login.model.Users;
 import com.project.login.model.enun.UserStatus;
 import com.project.login.repository.UserRepository;
@@ -19,34 +19,34 @@ public class UserService {
     @Autowired
     private  Cryptographic cryptographic;
 
-    public List<DtoUser> getAllUsers(){
+    public List<UserDTO> getAllUsers(){
         List<Users> usuarios = userRepository.findAll();
-        return usuarios.stream().map(DtoUser::new).collect(Collectors.toList());
+        return usuarios.stream().map(UserDTO::new).collect(Collectors.toList());
     }
 
-    public DtoUser getUserByEmail(String email){
+    public UserDTO getUserByEmail(String email){
         Users user = userRepository.findByEmail(email);
-        return new DtoUser(user);
+        return new UserDTO(user);
     }
-    public DtoUser findById(String id){
+    public UserDTO findById(String id){
         UUID uuid = UUID.fromString(id);
-        return new DtoUser(userRepository.findById(uuid).get());
+        return new UserDTO(userRepository.findById(uuid).get());
     }
-    public DtoUser post (DtoUser dtoUser){
-        dtoUser.setStatus(UserStatus.INATIVO);
-        String rawPassword = dtoUser.getPassword();
-        Users user = new Users(dtoUser);
+    public UserDTO post (UserDTO userDTO){
+        userDTO.setStatus(UserStatus.INATIVO);
+        String rawPassword = userDTO.getPassword();
+        Users user = new Users(userDTO);
         user.setPassword(cryptographic.encriptarSenha(rawPassword));
-        return new DtoUser(userRepository.save(user));
+        return new UserDTO(userRepository.save(user));
     }
 
     public void delete (UUID id){
         userRepository.deleteById(id);
     }
 
-    public DtoUser update(DtoUser dtoUser){
-        Users user = new Users(dtoUser);
-        return new DtoUser(userRepository.save(user));
+    public UserDTO update(UserDTO userDTO){
+        Users user = new Users(userDTO);
+        return new UserDTO(userRepository.save(user));
     }
 
 }

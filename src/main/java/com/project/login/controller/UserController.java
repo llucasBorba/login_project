@@ -1,6 +1,6 @@
 package com.project.login.controller;
 
-import com.project.login.dto.DtoUser;
+import com.project.login.dto.UserDTO;
 import com.project.login.service.EmailService;
 import com.project.login.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +22,8 @@ public class UserController {
 
 
     @PostMapping(" ")
-    public ResponseEntity<Object> creatUser(@RequestBody DtoUser dtoUser){
-        if (dtoUser.getEmail() == null || dtoUser.getEmail().isEmpty()){
+    public ResponseEntity<Object> creatUser(@RequestBody UserDTO userDTO){
+        if (userDTO.getEmail() == null || userDTO.getEmail().isEmpty()){
             return ResponseEntity.badRequest().body("Email é obrigatorio");
         }
 //        if (userRepository.findByEmail(dtoUser.email()) != null) {
@@ -32,27 +32,27 @@ public class UserController {
 
 // String message = emailService.sendTextMail(dtoUser.getEmail(),"Você tem perfil foda ", "6575");
 
-        return ResponseEntity.ok(userService.post(dtoUser));
+        return ResponseEntity.ok(userService.post(userDTO));
     }
 
     @GetMapping("")
-    public ResponseEntity<List<DtoUser>> getAllUsers(){
+    public ResponseEntity<List<UserDTO>> getAllUsers(){
         return ResponseEntity.ok(userService.getAllUsers());
     }
 
     @GetMapping("/{email}")
-    public ResponseEntity<DtoUser> getUserByEmail(@PathVariable String email){
+    public ResponseEntity<UserDTO> getUserByEmail(@PathVariable String email){
         return ResponseEntity.ok(userService.getUserByEmail(email));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<DtoUser> getUserByid(@PathVariable String id){
+    public ResponseEntity<UserDTO> getUserByid(@PathVariable String id){
         return ResponseEntity.ok(userService.findById(id));
     }
 
     @PutMapping(" ")
-    public ResponseEntity<DtoUser> updateUser(@RequestBody DtoUser dtoUser){
-        return ResponseEntity.ok(userService.update(dtoUser));
+    public ResponseEntity<UserDTO> updateUser(@RequestBody UserDTO userDTO){
+        return ResponseEntity.ok(userService.update(userDTO));
     }
 
     @DeleteMapping("/{id}")

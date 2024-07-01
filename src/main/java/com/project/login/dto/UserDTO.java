@@ -14,14 +14,14 @@ import java.util.UUID;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class DtoUser {
+public class UserDTO {
 
     private String email;
     private String password;
     private UUID id;
     private UserStatus status;
 
-    public DtoUser(Users user) {
+    public UserDTO(Users user) {
         BeanUtils.copyProperties(user,this);
     }
 }

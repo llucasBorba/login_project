@@ -1,6 +1,6 @@
 package com.project.login.controller;
 
-import com.project.login.dto.DtoResource;
+import com.project.login.dto.ResourceDTO;
 import com.project.login.service.ResourceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,23 +17,23 @@ public class ResourceController {
     ResourceService resourceService;
 
     @GetMapping
-    public ResponseEntity<List<DtoResource>> getAllResources(){
+    public ResponseEntity<List<ResourceDTO>> getAllResources(){
         return ResponseEntity.ok().body(resourceService.getAllResources());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<DtoResource> getResourceById(@PathVariable Long id){
+    public ResponseEntity<ResourceDTO> getResourceById(@PathVariable Long id){
         return ResponseEntity.ok().body(resourceService.getResourceById(id));
     }
 
     @PostMapping
-    public ResponseEntity<DtoResource> postResource(@RequestBody DtoResource dtoResource){
-        return ResponseEntity.ok().body(resourceService.post(dtoResource));
+    public ResponseEntity<ResourceDTO> postResource(@RequestBody ResourceDTO resourceDTO){
+        return ResponseEntity.ok().body(resourceService.createResource(resourceDTO));
     }
 
     @PutMapping
-    public ResponseEntity<DtoResource> putResource(@RequestBody DtoResource dtoResource){
-        return ResponseEntity.ok().body(resourceService.put(dtoResource));
+    public ResponseEntity<ResourceDTO> putResource(@RequestBody ResourceDTO resourceDTO){
+        return ResponseEntity.ok().body(resourceService.put(resourceDTO));
     }
 
     @DeleteMapping("/{id}")

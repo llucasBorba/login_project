@@ -1,11 +1,12 @@
 package com.project.login.model;
 
-import com.project.login.dto.DtoUser;
+import com.project.login.dto.UserDTO;
 import com.project.login.model.enun.UserStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.beans.BeanUtils;
 
 import java.util.Objects;
@@ -13,7 +14,8 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "USERS")
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class Users {
@@ -32,8 +34,8 @@ public class Users {
     @Column(nullable = false)
     private UserStatus status;
 
-    public Users(DtoUser dtoUser) {
-        BeanUtils.copyProperties(dtoUser,this);
+    public Users(UserDTO userDTO) {
+        BeanUtils.copyProperties(userDTO,this);
     }
     @Override
     public boolean equals(Object o) {
