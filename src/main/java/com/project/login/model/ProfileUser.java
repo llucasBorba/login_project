@@ -30,6 +30,12 @@ public class ProfileUser {
 
     public ProfileUser(ProfileUserDTO profileUserDTO){
         BeanUtils.copyProperties(profileUserDTO,this);
+        if(profileUserDTO.getUserDTO() != null){
+            this.users = new Users(profileUserDTO.getUserDTO());
+        }
+        if(profileUserDTO.getProfileDTO() != null){
+            this.profile = new Profile(profileUserDTO.getProfileDTO());
+        }
     }
 
 
