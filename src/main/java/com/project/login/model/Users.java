@@ -10,7 +10,6 @@ import lombok.Setter;
 import org.springframework.beans.BeanUtils;
 
 import java.util.Objects;
-import java.util.UUID;
 
 @Entity
 @Table(name = "USERS")
@@ -21,9 +20,9 @@ import java.util.UUID;
 public class Users {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    @Column( updatable = false, nullable = false)
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(updatable = false, nullable = false)
+    private Long id;
 
     @Column(nullable = false)
     private String email;
@@ -31,7 +30,8 @@ public class Users {
     @Column( nullable = false)
     private String password;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
+    @Enumerated(EnumType.STRING)
     private UserStatus status;
 
     public Users(UserDTO userDTO) {

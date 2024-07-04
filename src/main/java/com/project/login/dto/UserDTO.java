@@ -8,8 +8,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.BeanUtils;
 
-import java.util.UUID;
-
 @Data
 @Builder
 @NoArgsConstructor
@@ -18,7 +16,7 @@ public class UserDTO {
 
     private String email;
     private String password;
-    private UUID id;
+    private Long id;
     private UserStatus status;
 
     public UserDTO(Users user) {

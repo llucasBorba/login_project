@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -28,9 +27,8 @@ public class UserService {
         Users user = userRepository.findByEmail(email);
         return new UserDTO(user);
     }
-    public UserDTO findById(String id){
-        UUID uuid = UUID.fromString(id);
-        return new UserDTO(userRepository.findById(uuid).get());
+    public UserDTO findById(Long id){
+        return new UserDTO(userRepository.findById(id).get());
     }
     public UserDTO post (UserDTO userDTO){
         userDTO.setStatus(UserStatus.INATIVO);
@@ -40,7 +38,7 @@ public class UserService {
         return new UserDTO(userRepository.save(user));
     }
 
-    public void delete (UUID id){
+    public void delete (Long id){
         userRepository.deleteById(id);
     }
 
